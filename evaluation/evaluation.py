@@ -32,13 +32,7 @@ def run_evaluation(args):
         
         # Ensure output directory exists
         os.makedirs(f"outputs/{args.model_name}", exist_ok=True)
-        
-        # Determine task configurations based on CLI arguments
-        use_cot = args.cot
-        task_prompt_suffix = "_cot" if use_cot else ""
-        task_prompt_suffix += f"_{args.few_shot}" if args.few_shot > 0 else ""
-        result_file_suffix = "_no_circula" if args.without_circulaeval else ""
-        
+                
         
         # Run specific task or all tasks based on task_name argument
         if args.task_name == "task1" or args.task_name == "all":
@@ -50,31 +44,33 @@ def run_evaluation(args):
                 task_name="task1",
                 prompt_path=prompt_path,
                 data_file = "../datasets/visual_text_grounding.json",
-                output_file=f"outputs/{args.model_name}/task1{task_prompt_suffix}{result_file_suffix}.json",
+                output_file=f"outputs/{args.model_name}/task1.json",
             )
             task1.run()
             
         if args.task_name == "task2" or args.task_name == "all":
-            # Run Task 2: Classification task
-            prompt_path = f"prompt/classification_cn{task_prompt_suffix}{result_file_suffix}.txt"
-            logging.info(f"Running Task 2 (Classification) - Model: {args.model_name}")
+            # Run Task 2
+            prompt_path = f"prompts/temporal_inference.txt"
+            logging.info(f"Running Task 2- Model: {args.model_name}")
             task2 = Task2(
-                task_name="task2" + (task_prompt_suffix if use_cot else ""),
+                model = model
+                task_name="task2",
                 prompt_path=prompt_path,
-                output_file=f"outputs/{args.model_name}/task2{task_prompt_suffix}.json",
-                **task_params
+                data_file = "../datasets/visual_text_grounding.json",
+                output_file=f"outputs/{args.model_name}/task2.json",
             )
             task2.run()
             
         if args.task_name == "task3" or args.task_name == "all":
-            # Run Task 3: response task variant
-            prompt_path = f"prompt/response_cn{task_prompt_suffix}.txt"
-            logging.info(f"Running Task 3 (Response Variant) - Model: {args.model_name}")
+            # Run Task 3
+            prompt_path = f"prompts/causal_chain_completion.txt"
+            logging.info(f"Running Task 3- Model: {args.model_name}")
             task3 = Task3(
-                task_name="task3" + (task_prompt_suffix if use_cot else ""),
+                model = model
+                task_name="task3",
                 prompt_path=prompt_path,
-                output_file=f"outputs/{args.model_name}/task3{task_prompt_suffix}{result_file_suffix}.json",
-                **task_params
+                data_file = "../datasets/causal_chain_completion.json",
+                output_file=f"outputs/{args.model_name}/task3.json",
             )
             task3.run()
         
