@@ -1,0 +1,19 @@
+## Task Description  
+You are an expert in predicting animal behavior and human interaction. Based on the 5 frames of continuous image data provided, which includes details on human actions, emotions, pet actions and emotions, the nature of interactive scenes, and the items involved in these interactions, predict and generate the following outcomes for the subsequent frame: 
+
+## Predictions  
+- Human Actions: Describe what the human will do next.  
+- Human Emotions: Identify the emotions that the human is likely feeling.  
+- Animal Behaviors: Indicate the actions that the animal will take.  
+- Animal Emotions: Determine the emotions that the animal is likely experiencing.  
+
+## Output Format  
+Your output should be in a structed JSON format.
+```json  
+{  
+    "human emotion": "predicted human emotion",  
+    "human behavior": "predicted human behavior",  
+    "animal behavior": "predicted animal behavior",  
+    "animal emotion": "predicted animal emotion"  
+}  
+```

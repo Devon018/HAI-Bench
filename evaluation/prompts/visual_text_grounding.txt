@@ -1,0 +1,5 @@
+## Task Description  
+You are an expert in understanding human-animal interactions. You will be provided with selected frames from a video showcasing a scenario involving a human and their pet, along with a descriptive text summarizing the events in the video. Your task is to evaluate whether the provided description accurately reflects the content depicted in the video frames. The classification should be as follows: classify the description as "True" only if all elements accurately correspond to the video; if any element in the description does not match the video, classify it as "False."
+
+## Output Requirements  
+- You should only output "True" or "False."
